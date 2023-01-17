@@ -1,0 +1,69 @@
+{% extends 'common/base.html' %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block content %}
+    <div>
+        <div class="profile_0">
+            <div class="profile_1">
+                <img style="max-width: 200px" src="{{ avatar.image.url }}" alt="">
+            </div>
+            <div class="profile_2">
+                {% for u_p in user_plus %}
+                    {% if u_p.user.id == profile_user.id %}
+                        <div class="photo_data_01">
+                            <h3 id="photographer">
+                            Photographer {{ profile_user.first_name }} {{ profile_user.last_name }}
+                        </h3>
+                        </div>
+                        <div class="photo_data_02">
+                            <p>@{{ u_p.user }}</p>
+                        </div>
+                        <br>
+                        <div class="photo_data_05">
+                            <p>{{ u_p.country }}</p>
+                        </div>
+                        <div class="photo_data_04">
+                            <p><a href="#" class="href"><span class="pre_link">Web site: </span>{{ u_p.web_site }}</a></p>
+                        </div>
+                        <br>
+                        <div class="photo_data_03">
+                            <p>Phone: {{ u_p.phone }}</p><br>
+                        </div>
+                        <br>
+                        <div class="photo_data_06">
+                            <p>Language: {{ u_p.language }}</p><br>
+                        </div>
+                        <div class="photo_data_07">
+                            <p>Wedding photography value: {{ u_p.price }} $ for {{ u_p.hour }} hour</p>
+                        </div>
+                        <br>
+                        {% if profile_user.id == user.id %}
+                            <div class="photo_data_08">
+                                <p><a href="{% url 'personal_data' id=user.id %}" class="href">Edit personal data</a></p>
+                            </div>
+                            <div class="photo_data_09">
+                                <form action="{% url 'profile' id=user.id %}" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {{ form_portfolio.image_url }}
+                                    {{ form_portfolio.user }}
+                                    <button>Submit</button>
+                                </form>
+                            </div>
+                            <br>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="profile_3" id="portf">
+            {% for foto in portfolio %}
+                {% if foto.user_id == profile_user.id %}
+                    <img style="max-width: 200px" src="{{ foto.image_url.url }}" class="rounded float-start" alt="...">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

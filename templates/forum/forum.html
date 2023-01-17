@@ -1,0 +1,26 @@
+{% extends 'common/base.html' %}
+
+{% block title %}
+    Forum
+{% endblock %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <br>
+        <div>
+            <a href="{% url 'forum_create' %}" class="btn btn-warning">Create a subject</a>
+        </div>
+        <br>
+        {% if data %}
+            {% for el in data %}
+                <h3><a href="{% url 'forum_detail' el.id %}" class="href">{{ el.title }}</a></h3>
+                <p>...</p>
+                <p>{{ el.date }}</p>
+            {% endfor %}
+        {% else %}
+            <p>There are no articles</p>
+        {% endif %}
+    {% else %}
+        <div><h3>Іf you want to see all forum's articles, you have to register</h3></div>
+    {% endif %}
+{% endblock %}
