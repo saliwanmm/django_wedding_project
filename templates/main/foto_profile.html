@@ -1,0 +1,22 @@
+{% extends 'common/base.html' %}
+
+{% block title %}
+    foto
+{% endblock %}
+
+{% block content %}
+    <div>
+{#        <div class="profile_3">#}
+{#            {% for foto in portfolio %}#}
+{#                {% if foto.user_id == profile_user.id %}#}
+{#                    <a href="#"><img style="max-width: 200px" src="{{ foto.image_url.url }}" class="rounded float-start" alt="..."></a>#}
+{#                {% endif %}#}
+{#            {% endfor %}#}
+{#        </div>#}
+        <div>
+            <span>
+                <img class="displayed" style="max-height: 800px" src="{{ foto.image_url.url }}" alt="">
+            </span>
+        </div>
+    </div>
+{% endblock %}

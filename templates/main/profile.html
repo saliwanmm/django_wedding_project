@@ -21,47 +21,47 @@
                         <div class="photo_data_02">
                             <p>@{{ u_p.user }}</p>
                         </div>
-                        <br>
+                        <div class="clear"></div>
                         <div class="photo_data_05">
                             <p>{{ u_p.country }}</p>
                         </div>
                         <div class="photo_data_04">
                             <p><a href="#" class="href"><span class="pre_link">Web site: </span>{{ u_p.web_site }}</a></p>
                         </div>
-                        <br>
                         <div class="photo_data_03">
-                            <p>Phone: {{ u_p.phone }}</p><br>
+                            <p>Phone: {{ u_p.phone }}</p>
                         </div>
-                        <br>
                         <div class="photo_data_06">
-                            <p>Language: {{ u_p.language }}</p><br>
+                            <p>Language: {{ u_p.language }}</p>
                         </div>
                         <div class="photo_data_07">
                             <p>Wedding photography value: {{ u_p.price }} $ for {{ u_p.hour }} hour</p>
                         </div>
-                        <br>
-                        {% if profile_user.id == user.id %}
-                            <div class="photo_data_08">
-                                <p><a href="{% url 'personal_data' id=user.id %}" class="href">Edit personal data</a></p>
-                            </div>
-                            <div class="photo_data_09">
-                                <form action="{% url 'profile' id=user.id %}" method="POST" enctype="multipart/form-data">
-                                    {% csrf_token %}
-                                    {{ form_portfolio.image_url }}
-                                    {{ form_portfolio.user }}
-                                    <button>Submit</button>
-                                </form>
-                            </div>
-                            <br>
-                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </div>
         </div>
-        <div class="profile_3" id="portf">
+        <div class="clear"></div>
+        <div class="photo_data_10">
+            {% if profile_user.id == user.id %}
+                <div>
+                    <p><a href="{% url 'personal_data' id=user.id %}" class="href">Edit personal data</a></p>
+                </div>
+                <div class="photo_data_09">
+                    <form action="{% url 'profile' id=user.id %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form_portfolio.image_url }}
+                        {{ form_portfolio.user }}
+                        <button>Submit</button>
+                    </form>
+                </div>
+                <br>
+            {% endif %}
+        </div>
+        <div class="profile_3">
             {% for foto in portfolio %}
                 {% if foto.user_id == profile_user.id %}
-                    <img style="max-width: 200px" src="{{ foto.image_url.url }}" class="rounded float-start" alt="...">
+                    <a href="{% url "foto_profile" id=user.id pk=foto.id %}"><img style="max-width: 200px" src="{{ foto.image_url.url }}" class="rounded float-start" alt="..."></a>
                 {% endif %}
             {% endfor %}
         </div>

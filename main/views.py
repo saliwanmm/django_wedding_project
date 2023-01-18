@@ -187,3 +187,10 @@ def personal_data_update(request, id):
             })
     else:
         raise PermissionDenied
+
+
+def foto_profile(request, id, pk):
+    foto = Portfolio.objects.get(pk=pk)
+    return render(request, "main/foto_profile.html", {
+        "foto": foto
+    })

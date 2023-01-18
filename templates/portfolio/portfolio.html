@@ -7,10 +7,12 @@
 {% block content %}
 
     <h1 class="zagolovok">New photos on BestWed</h1>
-
-    {% for foto in portfolio %}
-{#        <img class="rounded float-start" style="max-width: 320px" src="{{ foto.image_url.url }}" alt="...">#}
-        <img class="img-fluid img-thumbnail" style="max-width: 320px" src="{{ foto.image_url.url }}" alt="...">
-    {% endfor %}
+    <div class="portfolio">
+        {% for foto in portfolio %}
+            <span class="spanBlock">
+                <img class="portfolio_image" style="max-width: 450px; max-height: 450px" src="{{ foto.image_url.url }}" alt="...">
+            </span>
+        {% endfor %}
+    </div>
 
 {% endblock %}
