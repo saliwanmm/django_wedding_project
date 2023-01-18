@@ -6,17 +6,38 @@
 
 {% block content %}
     <div>
-{#        <div class="profile_3">#}
-{#            {% for foto in portfolio %}#}
-{#                {% if foto.user_id == profile_user.id %}#}
-{#                    <a href="#"><img style="max-width: 200px" src="{{ foto.image_url.url }}" class="rounded float-start" alt="..."></a>#}
-{#                {% endif %}#}
-{#            {% endfor %}#}
-{#        </div>#}
-        <div>
+        <div class="foto_profile1">
+            <img style="max-width: 50px" src="{{ avatar.image.url }}" alt="">
+        </div>
+        <div class="foto_profile2">
+            <a href="{% url "profile" id=photographer.id %}"
+               class="href">{{ photographer.first_name }} {{ photographer.last_name }}</a>
+        </div>
+        <div class="foto_profile3">
+            <p>{{ photographer.username }}</p>
+        </div>
+
+        <div class="foto_profile4">
+            {% for foto in portfolio %}
+                {% if foto.user_id == photographer.id %}
+                    <p class="pBlock">
+                        <a href="{% url "foto_profile" id=foto.user_id pk=foto.id %}"><img style="max-width: 135px; max-height: 135px" src="{{ foto.image_url.url }}" class="rounded float-start"
+                                     alt="..."></a>
+                    </p>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="clear"></div>
+        <div class="foto_profile5">
             <span>
                 <img class="displayed" style="max-height: 800px" src="{{ foto.image_url.url }}" alt="">
             </span>
         </div>
+        {% if foto.user_id == user.id %}
+            <div class="delete_foto">
+                <a href="{% url "delete_foto" id=foto.id %}" class="btn btn-danger">Delete this foto</a>
+            </div>
+        {% endif %}
+
     </div>
 {% endblock %}
