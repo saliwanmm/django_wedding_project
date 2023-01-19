@@ -1,7 +1,8 @@
 from django.http import Http404
-from django.shortcuts import render, redirect
-from .models import Movie, Portfolio
-from .forms import MovieForm
+from django.contrib.auth.models import User
+from django.shortcuts import render
+from .models import Portfolio
+from main.models import PhotoAvatar
 
 
 def portfolio(request):
@@ -11,19 +12,34 @@ def portfolio(request):
     })
 
 
-# def movie(request, movie_id):
-#     movie = Movie.objects.get(pk=movie_id)
-#     if movie is not None:
-#         return render(request, 'portfolio/portfolio.html', {'movie': movie})
-#     else:
-#         raise Http404('Movie does not exist')
-#
-#
-# def upload(request):
-#     if request.POST:
-#         form = MovieForm(request.POST, request.FILES)
-#         print(request.FILES)
-#         if form.is_valid():
-#             form.save()
-#         return redirect('/')
-#     return render(request, 'portfolio/portfolio.html', {'form': MovieForm})
+def foto_portfolio(request, id, pk):
+    photographer = User.objects.get(id=id)
+    foto = Portfolio.objects.get(pk=pk)
+    try:
+        avatar = PhotoAvatar.objects.get(user_id=id)
+        portfolio = Portfolio.objects.all().order_by("-id")
+    except:
+        avatar = ''
+        portfolio = ''
+    return render(request, "portfolio/foto_portfolio.html", {
+        "photographer": photographer,
+        "foto": foto,
+        "avatar": avatar,
+        "portfolio": portfolio,
+    })
+
+# def foto_profile(request, id, pk):
+#     photographer = User.objects.get(id=id)
+#     foto = Portfolio.objects.get(pk=pk)
+#     try:
+#         avatar = PhotoAvatar.objects.get(user_id=id)
+#         portfolio = Portfolio.objects.all()
+#     except:
+#         avatar = ''
+#         portfolio = ''
+#     return render(request, "main/foto_profile.html", {
+#         "foto": foto,
+#         "photographer": photographer,
+#         "avatar": avatar,
+#         "portfolio": portfolio,
+#     })

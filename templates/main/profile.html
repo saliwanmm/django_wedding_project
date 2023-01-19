@@ -62,7 +62,9 @@
             {% for foto in portfolio %}
                 {% if foto.user_id == profile_user.id %}
                     <span class="spanBlock">
-                        <a href="{% url "foto_profile" id=foto.user_id pk=foto.id %}"><img style="max-width: 450px; max-height: 450px" src="{{ foto.image_url.url }}" class="rounded float-start" alt="..."></a>
+                        <a href="{% url "foto_profile" id=foto.user_id pk=foto.id %}">
+                            <img style="max-width: 450px; max-height: 450px" src="{{ foto.image_url.url }}" class="rounded float-start" alt="...">
+                        </a>
                     </span>
                 {% endif %}
             {% endfor %}

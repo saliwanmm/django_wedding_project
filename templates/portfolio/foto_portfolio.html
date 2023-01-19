@@ -6,6 +6,7 @@
 
 {% block content %}
     <div>
+        <p>Here will be many photos</p>
         <div class="foto_profile1">
             <img style="max-width: 50px" src="{{ avatar.image.url }}" alt="">
         </div>
@@ -14,17 +15,15 @@
                class="href">{{ photographer.first_name }} {{ photographer.last_name }}</a>
         </div>
         <div class="foto_profile3">
-            <p>{{ photographer.username }}</p>
+            <p>@{{ photographer.username }}</p>
         </div>
 
         <div class="foto_profile4">
             {% for foto in portfolio %}
-                {% if foto.user_id == photographer.id %}
                     <p class="pBlock">
-                        <a href="{% url "foto_profile" id=foto.user_id pk=foto.id %}"><img style="max-width: 135px; max-height: 135px" src="{{ foto.image_url.url }}" class="rounded float-start"
+                        <a href="{% url "foto_portfolio" id=foto.user_id pk=foto.id %}"><img style="max-width: 135px; max-height: 135px" src="{{ foto.image_url.url }}" class="rounded float-start"
                                      alt="..."></a>
                     </p>
-                {% endif %}
             {% endfor %}
         </div>
         <div class="clear"></div>
@@ -38,6 +37,5 @@
                 <a href="{% url "delete_foto" id=foto.id %}" class="btn btn-danger">Delete this foto</a>
             </div>
         {% endif %}
-
     </div>
 {% endblock %}

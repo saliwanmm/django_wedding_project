@@ -9,6 +9,7 @@ body {
 .zagolovok {
     color: #000000;
     font-weight: lighter;
+    text-align: center;
 }
 
 .href {
@@ -128,6 +129,7 @@ IMG.displayed {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 5px;
 }
 
 .delete_foto {
@@ -144,10 +146,6 @@ IMG.displayed {
     font-size: 150%;
     float: left;
     padding-right: 10px;
-}
-
-.foto_profile3 {
-    /*font-weight: lighter;*/
 }
 
 .foto_profile5 {

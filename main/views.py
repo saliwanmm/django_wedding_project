@@ -104,7 +104,7 @@ def profile(request, id):
             form_portfolio = PortfolioForm(request.POST, request.FILES)
             if form_portfolio.is_valid():
                 form_portfolio.save()
-            return redirect('/')
+            return redirect('portfolio')
         try:
             avatar = PhotoAvatar.objects.get(user_id=id)
             portfolio = Portfolio.objects.all()

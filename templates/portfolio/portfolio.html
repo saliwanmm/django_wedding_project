@@ -10,7 +10,9 @@
     <div class="portfolio">
         {% for foto in portfolio %}
             <span class="spanBlock">
-                <img class="portfolio_image" style="max-width: 450px; max-height: 450px" src="{{ foto.image_url.url }}" alt="...">
+                <a href="{% url "foto_portfolio" id=foto.user_id pk=foto.id %}">
+                    <img class="portfolio_image" style="max-width: 450px; max-height: 450px" src="{{ foto.image_url.url }}" alt="...">
+                </a>
             </span>
         {% endfor %}
     </div>
