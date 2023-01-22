@@ -27,19 +27,3 @@ def foto_portfolio(request, id, pk):
         "avatar": avatar,
         "portfolio": portfolio,
     })
-
-# def foto_profile(request, id, pk):
-#     photographer = User.objects.get(id=id)
-#     foto = Portfolio.objects.get(pk=pk)
-#     try:
-#         avatar = PhotoAvatar.objects.get(user_id=id)
-#         portfolio = Portfolio.objects.all()
-#     except:
-#         avatar = ''
-#         portfolio = ''
-#     return render(request, "main/foto_profile.html", {
-#         "foto": foto,
-#         "photographer": photographer,
-#         "avatar": avatar,
-#         "portfolio": portfolio,
-#     })

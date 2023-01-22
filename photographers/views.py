@@ -9,7 +9,7 @@ def photographers(request):
     photographers_plus = UserProfile.objects.all()
     try:
         avatars = PhotoAvatar.objects.all()
-        portfolio = Portfolio.objects.all()
+        portfolio = Portfolio.objects.all().order_by("-id")
     except:
         avatars = ''
         portfolio = ''
@@ -20,6 +20,7 @@ def photographers(request):
             "photographers_plus": photographers_plus,
             "avatars": avatars,
             "portfolio": portfolio,
+            "flag": 1,
         })
     else:
         return render(request, 'photographers/photographers.html', {
@@ -27,6 +28,19 @@ def photographers(request):
             "photographers_plus": photographers_plus,
         })
 
+
+def foto_photographer(request, id, pk):
+    photographer = User.objects.get(id=id)
+    photo = Portfolio.objects.get(pk=pk)
+    try:
+        portfolio = Portfolio.objects.filter(user_id=id).order_by("-id")
+    except:
+        portfolio = ''
+    return render(request, "photographers/foto_photographer.html", {
+        "photo": photo,
+        "portfolio": portfolio,
+        "photographer": photographer,
+    })
 
 # def phone_card(request, id):
 #     photographers_plus = UserProfile.objects.get(user_id=id)

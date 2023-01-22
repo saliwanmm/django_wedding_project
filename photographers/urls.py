@@ -1,9 +1,8 @@
 from django.urls import path
-from .views import photographers
-# from .views import phone_card
+from .views import photographers, foto_photographer
 
 
 urlpatterns = [
     path('', photographers, name='photographers'),
-    # path('phone/<int:id>', phone_card, name="phone_card"),
+    path('<int:id>/<int:pk>', foto_photographer, name='foto_photographer'),
 ]
