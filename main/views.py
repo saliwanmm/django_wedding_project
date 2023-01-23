@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import PermissionDenied
 from .models import PhotoAvatar, UserProfile
 from .forms import PhotoAvatarForm
-from portfolio.models import Portfolio
+from portfolio.models import Portfolio, PortfolioComment
 from portfolio.forms import PortfolioForm
 from django.http import HttpResponse, Http404
 
@@ -192,17 +192,22 @@ def personal_data_update(request, id):
 def foto_profile(request, id, pk):
     photographer = User.objects.get(id=id)
     foto = Portfolio.objects.get(pk=pk)
+    comments = PortfolioComment.objects.filter(cut_id=pk)
     try:
         avatar = PhotoAvatar.objects.get(user_id=id)
         portfolio = Portfolio.objects.all()
+        avatars_comment = PhotoAvatar.objects.all()
     except:
         avatar = ''
         portfolio = ''
+        avatars_comment = ''
     return render(request, "main/foto_profile.html", {
         "foto": foto,
         "photographer": photographer,
         "avatar": avatar,
         "portfolio": portfolio,
+        "comments": comments,
+        "avatars_comment": avatars_comment,
     })
 
 

@@ -6,7 +6,6 @@
 
 {% block content %}
     <div>
-        <p>Here will be many photos</p>
         <div class="foto_profile1">
             <img style="max-width: 50px" src="{{ avatar.image.url }}" alt="">
         </div>
@@ -37,5 +36,41 @@
                 <a href="{% url "delete_foto" id=foto.id %}" class="btn btn-danger">Delete this foto</a>
             </div>
         {% endif %}
+
+        <div class="comment">
+            {% for comment in comments %}
+                <div class="comment">
+                    {% for avatar_comment in avatars_comment %}
+                        {% if avatar_comment.user_id == comment.user_id %}
+                            <div class="foto_profile1">
+                                <a href="{% url "profile" id=comment.user.id %}"><img style="max-width: 50px" src="{{ avatar_comment.image.url }}" alt=""></a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="forum_detail1">
+                        <a href="{% url "profile" id=comment.user.id %}">{{ comment.user.first_name }} {{ comment.user.last_name }} * {{ comment.user.username }}</a>
+                    </div>
+                    <div class="forum_detail2">
+                        <p>:</p>
+                    </div>
+                    <div class="forum_detail3">
+                        <p>{{ comment.full_text }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <form method="POST" action="{% url 'portfolio_comment_crate' id=foto.id %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="full_text" class="form-label">Your comment</label>
+                <input type="text" class="form-control" name="full_text" id="full_text" aria-describedby="title">
+            </div>
+
+            <button class="btn btn-success" type="submit">Add comment</button>
+            <br>
+            <span>{{ error }}</span>
+        </form>
+
     </div>
 {% endblock %}

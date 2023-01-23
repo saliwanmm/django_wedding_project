@@ -7,8 +7,8 @@
 {% block content %}
     {% if request.user.is_authenticated %}
         <br>
-        <div>
-            <a href="{% url 'forum_create' %}" class="btn btn-warning">Create a subject</a>
+        <div class="create_forum">
+            <a href="{% url 'forum_create' %}" class="button button1">Create a subject</a>
         </div>
         <br>
         {% if data %}

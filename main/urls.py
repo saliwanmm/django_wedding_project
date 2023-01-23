@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import home
 from . import views
+from portfolio.views import portfolio_comment_crate
 
 
 urlpatterns = [
@@ -16,4 +17,5 @@ urlpatterns = [
     path('personal_data_update/<int:id>', views.personal_data_update, name='personal_data_update'),
     path('profile/<int:id>/<int:pk>', views.foto_profile, name='foto_profile'),
     path('delete/<int:id>', views.delete_foto, name='delete_foto'),
+    path('comment_create/<int:id>', portfolio_comment_crate, name='portfolio_comment_crate'),
 ]

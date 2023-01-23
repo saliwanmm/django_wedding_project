@@ -9,11 +9,28 @@
         <h1>{{ forum.title }}</h1>
         <p>{{ forum.full_text }}</p><br>
         <p>Comments:</p>
-        {% for c in comment %}
-            {% if c.cut_id == forum.id %}
-                <p>{{ c.user.first_name }} {{ c.user.last_name }} * {{ c.user.username }} : {{ c.full_text }}</p>
-            {% endif %}
-        {% endfor %}
+        <div class="comment">
+            {% for comment in comments %}
+                <div class="comment">
+                    {% for avatar in avatars %}
+                        {% if avatar.user_id == comment.user_id %}
+                            <div class="foto_profile1">
+                                <a href="{% url "profile" id=comment.user.id %}"><img style="max-width: 50px" src="{{ avatar.image.url }}" alt=""></a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="forum_detail1">
+                        <a href="{% url "profile" id=comment.user.id %}">{{ comment.user.first_name }} {{ comment.user.last_name }} * {{ comment.user.username }}</a>
+                    </div>
+                    <div class="forum_detail2">
+                        <p>:</p>
+                    </div>
+                    <div class="forum_detail3">
+                        <p>{{ comment.full_text }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
 
         <form method="POST" action="{% url 'comment_create' id=forum.id %}">
             {% csrf_token %}

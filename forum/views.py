@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Forum, ForumComment
 from .forms import ForumForm, CommentForm
+from main.models import PhotoAvatar
 from django.views.generic import DetailView, UpdateView, DeleteView
 
 
@@ -17,10 +18,15 @@ def forum(request):
 
 def ForumDetailView(request, id):
     forum = Forum.objects.get(id=id)
-    comment = ForumComment.objects.all()
+    comments = ForumComment.objects.filter(cut_id=id)
+    try:
+        avatars = PhotoAvatar.objects.all()
+    except:
+        avatars = ''
     return render(request, 'forum/detail_view.html', {
         'forum': forum,
-        'comment': comment
+        'comments': comments,
+        'avatars': avatars,
     })
 
 
