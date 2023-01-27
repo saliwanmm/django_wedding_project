@@ -10,7 +10,13 @@ from django.http import HttpResponse, Http404
 
 
 def home(request):
-    return render(request, 'main/index.html')
+    try:
+        portfolio = Portfolio.objects.all()
+    except:
+        portfolio = ''
+    return render(request, 'main/index.html', {
+        "portfolio": portfolio,
+    })
 
 
 def about(request):

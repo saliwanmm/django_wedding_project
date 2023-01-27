@@ -10,7 +10,7 @@ class Movie(models.Model):
 class Portfolio(models.Model):
     image_url = models.ImageField(upload_to='portfolio/files/covers')
     user = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
-
+    counter = models.IntegerField('Counter', default=0)
 
 
 class PortfolioComment(models.Model):

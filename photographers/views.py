@@ -34,6 +34,24 @@ def foto_photographer(request, id, pk):
     photo = Portfolio.objects.get(pk=pk)
     try:
         portfolio = Portfolio.objects.filter(user_id=id).order_by("-id")
+        portfolio_new = []
+        flag = False
+        for port in portfolio:
+            if flag == False:
+                if port.id == photo.id:
+                    portfolio_new.append(port)
+                    flag = True
+            else:
+                portfolio_new.append(port)
+        for port in portfolio:
+            if flag == True:
+                if port.id != photo.id:
+                    portfolio_new.append(port)
+                else:
+                    flag = False
+            else:
+                break
+        portfolio = portfolio_new
     except:
         portfolio = ''
     return render(request, "photographers/foto_photographer.html", {

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Forum(models.Model):
-    title = models.CharField('Name', max_length=50)
+    title = models.CharField('Name', max_length=250)
     full_text = models.TextField('Review')
     date = models.DateField('Date of publication')
 

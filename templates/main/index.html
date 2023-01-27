@@ -5,5 +5,46 @@
 {% endblock %}
 
 {% block content %}
-    <h1>This is home page</h1>
+    <div class="header">
+        <h1>Responsive Image Grid</h1>
+        <p>Resize the browser window to see the responsive effect.</p>
+    </div>
+    <div class="row">
+        <div class="column">
+            {% for foto in portfolio %}
+                <img src="{{ foto.image_url.url }}" style="max-height: 300px; border-radius: 5px; margin: 5px">
+{#                <img src="/w3images/rocks.jpg" style="width:100%">#}
+{#                <img src="/w3images/falls2.jpg" style="width:100%">#}
+{#                <img src="/w3images/paris.jpg" style="width:100%">#}
+{#                <img src="/w3images/nature.jpg" style="width:100%">#}
+{#                <img src="/w3images/mist.jpg" style="width:100%">#}
+{#                <img src="/w3images/paris.jpg" style="width:100%">#}
+            {% endfor %}
+        </div>
+{#        <div class="column">#}
+{#            <img src="/w3images/underwater.jpg" style="width:100%">#}
+{#            <img src="/w3images/ocean.jpg" style="width:100%">#}
+{#            <img src="/w3images/wedding.jpg" style="width:100%">#}
+{#            <img src="/w3images/mountainskies.jpg" style="width:100%">#}
+{#            <img src="/w3images/rocks.jpg" style="width:100%">#}
+{#            <img src="/w3images/underwater.jpg" style="width:100%">#}
+{#        </div>#}
+{#        <div class="column">#}
+{#            <img src="/w3images/wedding.jpg" style="width:100%">#}
+{#            <img src="/w3images/rocks.jpg" style="width:100%">#}
+{#            <img src="/w3images/falls2.jpg" style="width:100%">#}
+{#            <img src="/w3images/paris.jpg" style="width:100%">#}
+{#            <img src="/w3images/nature.jpg" style="width:100%">#}
+{#            <img src="/w3images/mist.jpg" style="width:100%">#}
+{#            <img src="/w3images/paris.jpg" style="width:100%">#}
+{#        </div>#}
+{#        <div class="column">#}
+{#            <img src="/w3images/underwater.jpg" style="width:100%">#}
+{#            <img src="/w3images/ocean.jpg" style="width:100%">#}
+{#            <img src="/w3images/wedding.jpg" style="width:100%">#}
+{#            <img src="/w3images/mountainskies.jpg" style="width:100%">#}
+{#            <img src="/w3images/rocks.jpg" style="width:100%">#}
+{#            <img src="/w3images/underwater.jpg" style="width:100%">#}
+{#        </div>#}
+    </div>
 {% endblock %}

@@ -6,17 +6,18 @@
 
 {% block content %}
     <div>
-        <div class="foto_profile1">
-            <img style="max-width: 50px" src="{{ avatar.image.url }}" alt="">
+        <div class="foto_profile0">
+            <div class="foto_profile1">
+                <img style="max-width: 50px" src="{{ avatar.image.url }}" alt="">
+            </div>
+            <div class="foto_profile2">
+                <a href="{% url "profile" id=photographer.id %}"
+                   class="href">{{ photographer.first_name }} {{ photographer.last_name }}</a>
+            </div>
+            <div class="foto_profile3">
+                <p>{{ photographer.username }}</p>
+            </div>
         </div>
-        <div class="foto_profile2">
-            <a href="{% url "profile" id=photographer.id %}"
-               class="href">{{ photographer.first_name }} {{ photographer.last_name }}</a>
-        </div>
-        <div class="foto_profile3">
-            <p>{{ photographer.username }}</p>
-        </div>
-
         <div class="foto_profile4">
             {% for foto in portfolio %}
                 {% if foto.user_id == photographer.id %}
@@ -27,11 +28,20 @@
                 {% endif %}
             {% endfor %}
         </div>
+
         <div class="clear"></div>
         <div class="foto_profile5">
             <span>
                 <img class="displayed" style="max-height: 800px; max-width: 1300px; border-radius: 5px" src="{{ foto.image_url.url }}" alt="">
             </span>
+        </div>
+        <div class="heard">
+            <p class="blocktext">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-heart"
+                     viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                </svg>
+            </p>
         </div>
         {% if foto.user_id == user.id %}
             <div class="delete_foto">

@@ -19,7 +19,9 @@
                     <div class="photographer1_avatar">
                         {% for avatar in avatars %}
                             {% if avatar.user_id == photographer.id %}
-                                <img style="max-width: 180px; border-radius: 20px" src="{{ avatar.image.url }}" alt="">
+                                <a href="{% url "profile" id=photographer.id %}"
+                                   class="href"><img style="max-width: 180px; border-radius: 20px"
+                                                     src="{{ avatar.image.url }}" alt=""></a>
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -50,65 +52,6 @@
                 </div>
                 <div class="clear"></div>
                 <div class="probil"></div>
-
-
-
-
-{#                <div class="card mb-3" style="max-width: 540px;">#}
-{#                    <div class="row g-0">#}
-{#                        <div class="col-md-4">#}
-{#                            <div class="photographer_data0">#}
-{#                                <a href="{% url "profile" id=photographer.id %}"#}
-{#                                   class="href">{{ photographer.first_name }} {{ photographer.last_name }}</a>#}
-{#                            </div>#}
-{##}
-{#                            {% for avatar in avatars %}#}
-{#                                {% if avatar.user_id == photographer.id %}#}
-{#                                    <img style="max-width: 180px" src="{{ avatar.image.url }}" alt="">#}
-{#                                {% endif %}#}
-{#                            {% endfor %}#}
-{##}
-{#                        </div>#}
-{#                        <div class="col-md-8">#}
-{#                            <div class="card-body">#}
-{#                                <div class="photographer_data2">#}
-{#                                    <p>{{ photographer_plus.country }}</p>#}
-{#                                </div>#}
-{#                                <div class="photographer_data5">#}
-{#                                    {{ photographer_plus.phone }}#}
-{#                                    <a href="#" type="button" class="btn btn-default">#}
-{#                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"#}
-{#                                             fill="currentColor"#}
-{#                                             class="bi bi-telephone-fill" viewBox="0 0 16 16">#}
-{#                                            <path fill-rule="evenodd"#}
-{#                                                  d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>#}
-{#                                        </svg>#}
-{#                                        {{ photographer_plus.phone }}#}
-{#                                    </a>#}
-{#                                </div>#}
-{##}
-{#                                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">#}
-{#                                    <div class="carousel-inner">#}
-{#                                        {% for foto in portfolio %}#}
-{#                                            {% if foto.user_id == photographer.id %}#}
-{#                                                <div class="carousel-item active">#}
-{#                                                    <img style="max-height: 150px" src="{{ foto.image_url.url }}" alt="">#}
-{#                                                </div>#}
-{#                                            {% endif %}#}
-{#                                        {% endfor %}#}
-{#                                    </div>#}
-{#                                </div>#}
-{##}
-{#                                <div class="photographer_data4">#}
-{#                                    <p class="card-text"><small class="text-muted">{{ photographer_plus.price }} $ for {{ photographer_plus.hour }} hour</small></p>#}
-{#                                </div>#}
-{#                                <div class="photographer_data6">#}
-{#                                    <a href="{% url "profile" id=photographer.id %}" class="href">Visit profile</a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
 
             {% endif %}
         {% endfor %}

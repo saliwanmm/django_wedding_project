@@ -7,7 +7,8 @@
 {% block content %}
     <div>
         <div class="foto_profile1">
-            <img style="max-width: 50px" src="{{ avatar.image.url }}" alt="">
+            <a href="{% url "profile" id=photographer.id %}"
+               class="href"><img style="max-width: 50px" src="{{ avatar.image.url }}" alt=""></a>
         </div>
         <div class="foto_profile2">
             <a href="{% url "profile" id=photographer.id %}"
