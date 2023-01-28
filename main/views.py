@@ -6,16 +6,77 @@ from .models import PhotoAvatar, UserProfile
 from .forms import PhotoAvatarForm
 from portfolio.models import Portfolio, PortfolioComment
 from portfolio.forms import PortfolioForm
+from forum.models import Forum
 from django.http import HttpResponse, Http404
 
 
 def home(request):
+    forums = Forum.objects.all().order_by('-id')
+    users = UserProfile.objects.all()
     try:
-        portfolio = Portfolio.objects.all()
+        portfolio = Portfolio.objects.all().order_by("id")[:20]
+        fotos1 = portfolio[0]
+        fotos2 = portfolio[1]
+        fotos3 = portfolio[2]
+        fotos4 = portfolio[3]
+        fotos5 = portfolio[4]
+        fotos6 = portfolio[5]
+        fotos7 = portfolio[6]
+        fotos8 = portfolio[7]
+        fotos9 = portfolio[8]
+        fotos10 = portfolio[9]
+        fotos11 = portfolio[10]
+        fotos12 = portfolio[11]
+        fotos13 = portfolio[12]
+        fotos14 = portfolio[13]
+        fotos15 = portfolio[14]
+        fotos16 = portfolio[15]
+        fotos17 = portfolio[16]
+        fotos18 = portfolio[17]
+        fotos19 = portfolio[18]
+
     except:
-        portfolio = ''
+        fotos1 = ''
+        fotos2 = ''
+        fotos3 = ''
+        fotos4 = ''
+        fotos5 = ''
+        fotos6 = ''
+        fotos7 = ''
+        fotos8 = ''
+        fotos9 = ''
+        fotos10 = ''
+        fotos11 = ''
+        fotos12 = ''
+        fotos13 = ''
+        fotos14 = ''
+        fotos15 = ''
+        fotos16 = ''
+        fotos17 = ''
+        fotos18 = ''
+        fotos19 = ''
     return render(request, 'main/index.html', {
-        "portfolio": portfolio,
+        "forums": forums,
+        "users": users,
+        "fotos1": fotos1,
+        "fotos2": fotos2,
+        "fotos3": fotos3,
+        "fotos4": fotos4,
+        "fotos5": fotos5,
+        "fotos6": fotos6,
+        "fotos7": fotos7,
+        "fotos8": fotos8,
+        "fotos9": fotos9,
+        "fotos10": fotos10,
+        "fotos11": fotos11,
+        "fotos12": fotos12,
+        "fotos13": fotos13,
+        "fotos14": fotos14,
+        "fotos15": fotos15,
+        "fotos16": fotos16,
+        "fotos17": fotos17,
+        "fotos18": fotos18,
+        "fotos19": fotos19,
     })
 
 
