@@ -1,0 +1,28 @@
+{% extends 'common/base.html' %}
+
+{% block title %}
+    Photo-book
+{% endblock %}
+
+{% block content %}
+    <h1 class="zagolovok">What story do you want to create?</h1>
+
+    {% if request.user.is_authenticated %}
+        <div class="features">
+        <h1>Form for creating stories</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Story's name</span>
+                {{ form.title }}
+            </div>
+            <p>Upload main image</p>
+            {{ form.image }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    {% else %}
+        <div><h3>Іf you want to create a new article, you have to register</h3></div>
+    {% endif %}
+
+{% endblock %}

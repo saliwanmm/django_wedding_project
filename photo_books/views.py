@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import PhotoBook, PhotoBookPortfolio, PhotoBookComment
 from main.models import PhotoAvatar
 from django.contrib.auth.models import User
+from .forms import PhotoBookForm
 
 
 def photo_books(request):
@@ -29,6 +30,22 @@ def story(request, id, pk):
     })
 
 
+def story_create(request):
+    if request.method == "POST":
+        form = PhotoBookForm(request.POST, request.FILES)
+        if form.is_valid():
+            my_model = form.save(commit=False)
+            my_model.user = request.user
+            my_model.save()
+            return redirect("photo_books")
+    else:
+        form = PhotoBookForm()
+    return render(request, "photo_books/photo_book_create.html", {
+        "form": form,
+    })
+
+
+
 def photo_book_comment_crate(request, id):
     if request.method == 'GET':
         return render(request, 'photo_books/foto_photo_book.html')
@@ -37,8 +54,9 @@ def photo_book_comment_crate(request, id):
         comment.full_text = request.POST.get('full_text')
         comment.cut_id = id
         comment.user = request.user
+        pk = comment.user.id
         comment.save()
-        return redirect('photo_books')
+        return redirect('story', id=pk, pk=id)
 
 
 def foto_photobook_daughter(request, id, pk):
@@ -69,3 +87,11 @@ def foto_photobook_daughter(request, id, pk):
         "portfolio": portfolio,
         "photo": photo,
     })
+
+
+def delete_comment_photobook(request, id):
+    temp_comment = PhotoBookComment.objects.get(id=id)
+    cut_id = temp_comment.cut_id
+    user_id = temp_comment.user_id
+    PhotoBookComment(id=id).delete()
+    return redirect("story", id=user_id, pk=cut_id)

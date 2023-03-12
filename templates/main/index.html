@@ -87,15 +87,18 @@
     </div>
 
     <div class="sectionBlock">
-        <div class="home_interview">
-            <img src="{{ fotos1.image_url.url }}" style="max-height: 200px; max-width: 300px;margin-left: auto; margin-right: auto border-radius: 5px">
-        </div>
-        <div class="home_interview">
-            <img src="{{ fotos2.image_url.url }}" style="max-height: 200px; max-width: 300px; border-radius: 5px">
-        </div>
-        <div class="home_interview">
-            <img src="{{ fotos3.image_url.url }}" style="max-height: 200px; max-width: 300px;margin-left: auto; margin-right: auto border-radius: 5px">
-        </div>
+        {% for userg in usersg %}
+            {% for avatar in avatars %}
+                {% if avatar.user_id == userg.id %}
+                    <div class="home_interview">
+                        <p class="home_interview_1">{{ userg.first_name }} {{ userg.last_name }}</p>
+                        <div class="home_interview_image">
+                            <img class="avatar_interview" src="{{ avatar.image.url }}">
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
     </div>
 
     <div class="clear"></div>

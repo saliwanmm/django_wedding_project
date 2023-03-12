@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Forum(models.Model):
     title = models.CharField('Name', max_length=250)
     full_text = models.TextField('Review')
-    date = models.DateField('Date of publication')
+    date = models.DateField('Date of publication', auto_now_add=True)
 
     def __str__(self):
         return self.title

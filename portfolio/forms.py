@@ -13,9 +13,9 @@ class MovieForm(ModelForm):
 
 
 class PortfolioForm(ModelForm):
-    image_url = forms.ImageField()
-    user = forms.TextInput()
+    # image_url = forms.ImageField()
+    # user = forms.TextInput()
 
     class Meta:
         model = Portfolio
-        fields = ['image_url', 'user']
+        fields = ['image_url']

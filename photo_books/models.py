@@ -11,7 +11,7 @@ class PhotoBook(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return f"/forum/{self.id}"
+        return f"/photo_books/{self.id}"
 
     class Meta:
         verbose_name = 'PhotoBook'

@@ -39,7 +39,7 @@ def comment_crate(request, id):
         comment.cut_id = id
         comment.user = request.user
         comment.save()
-        return redirect('forum')
+        return redirect('forum_detail', id=id)
 
 
 def forum_create(request):

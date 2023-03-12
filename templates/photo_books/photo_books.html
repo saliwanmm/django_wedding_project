@@ -7,6 +7,10 @@
 {% block content %}
     <h1 class="zagolovok">New stories on BestWed</h1>
 
+    <div class="create_forum">
+        <a href="{% url "story-create" %}" class="button button1">Create new photobook</a>
+    </div>
+
     <div class="photo_book_general">
         {% for photobook in photobooks %}
             <div class="photo_book">
@@ -14,12 +18,12 @@
                     <p>{{ photobook.title }}</p>
                 </div>
                 <div class="photo_book_photo">
-                <span class="spanBlock">
-                    <a href="{% url "story" id=photobook.user_id pk=photobook.id %}">
-                        <img class="portfolio_image" style="max-width: 450px; max-height: 450px"
-                             src="{{ photobook.image.url }}" alt="...">
-                    </a>
-                </span>
+                    <span class="spanBlock">
+                        <a href="{% url "story" id=photobook.user_id pk=photobook.id %}">
+                            <img class="portfolio_image" style="max-width: 450px; max-height: 450px"
+                                 src="{{ photobook.image.url }}" alt="...">
+                        </a>
+                    </span>
                 </div>
             </div>
         {% endfor %}

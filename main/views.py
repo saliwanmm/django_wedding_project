@@ -12,9 +12,11 @@ from django.http import HttpResponse, Http404
 
 def home(request):
     forums = Forum.objects.all().order_by('-id')
+    usersg = User.objects.all()[:3]
     users = UserProfile.objects.all()
     try:
         portfolio = Portfolio.objects.all().order_by("id")[:20]
+        avatars = PhotoAvatar.objects.all()
         fotos1 = portfolio[0]
         fotos2 = portfolio[1]
         fotos3 = portfolio[2]
@@ -34,8 +36,8 @@ def home(request):
         fotos17 = portfolio[16]
         fotos18 = portfolio[17]
         fotos19 = portfolio[18]
-
     except:
+        avatars = ''
         fotos1 = ''
         fotos2 = ''
         fotos3 = ''
@@ -56,7 +58,9 @@ def home(request):
         fotos18 = ''
         fotos19 = ''
     return render(request, 'main/index.html', {
+        "avatars": avatars,
         "forums": forums,
+        "usersg": usersg,
         "users": users,
         "fotos1": fotos1,
         "fotos2": fotos2,
@@ -170,11 +174,13 @@ def profile(request, id):
         if request.POST:
             form_portfolio = PortfolioForm(request.POST, request.FILES)
             if form_portfolio.is_valid():
-                form_portfolio.save()
-            return redirect('portfolio')
+                my_model = form_portfolio.save(commit=False)
+                my_model.user = request.user
+                my_model.save()
+            return redirect('profile', id=id)
         try:
             avatar = PhotoAvatar.objects.get(user_id=id)
-            portfolio = Portfolio.objects.all()
+            portfolio = Portfolio.objects.all().order_by("-id")
         except:
             avatar = ''
             portfolio = ''
@@ -204,8 +210,10 @@ def personal_data(request, id):
             PhotoAvatar.objects.filter(user_id=id).delete()
             form_avatar = PhotoAvatarForm(request.POST, request.FILES)
             if form_avatar.is_valid():
-                form_avatar.save()
-            return redirect("/")
+                my_model = form_avatar.save(commit=False)
+                my_model.user = request.user
+                my_model.save()
+                return redirect("personal_data", id=id)
         try:
             avatar = PhotoAvatar.objects.get(user_id=id)
         except:
@@ -246,7 +254,7 @@ def personal_data_update(request, id):
             user_plus.save()
             user.save()
             login(request, user)
-            return redirect("/")
+            return redirect("profile", id=id)
 
         return render(request, 'main/personal_data.html', {
                 "user": user,
@@ -279,5 +287,7 @@ def foto_profile(request, id, pk):
 
 
 def delete_foto(request, id):
+    temp_photo = Portfolio.objects.get(id=id)
+    user_id = temp_photo.user_id
     Portfolio.objects.filter(id=id).delete()
-    return redirect('/')
+    return redirect('profile', id=user_id)

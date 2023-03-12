@@ -5,7 +5,7 @@ from .models import Forum, ForumComment
 class ForumForm(ModelForm):
     class Meta:
         model = Forum
-        fields = ['title', 'full_text', 'date']
+        fields = ['title', 'full_text']
 
         widgets = {
             'title': TextInput(attrs={

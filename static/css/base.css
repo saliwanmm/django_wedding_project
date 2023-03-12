@@ -21,6 +21,11 @@
     margin-right: 10px;
 }
 
+.forum_detail3 {
+    float: left;
+    margin-right: 10px;
+}
+
 .comment {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -154,13 +159,45 @@ IMG.displayed {
     border-radius: 5px;
 }
 
+.responsive img {
+    display: block;
+    width: auto;
+    /*max-width: 100%;*/
+    height: auto;
+    border: 1px solid black;
+}
+
 .delete_foto {
     text-align: center;
     margin-top: 30px;
 }
 
 .foto_profile4 {
+    display: block;
     padding-top: 20px;
+    border: 1px solid white;
+    height: 120px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.foto_profile4Block {
+    border: 1px solid black;
+}
+
+.pBlock {
+    display: block;
+    height: 90px;
+    width: 90px;
+    /*border: 1px solid black;*/
+    border-radius: 5px;
+    margin: 4px;
+    overflow: hidden;
+    float: left;
+}
+
+.foto_profile4 .pBlock {
+    /*border: 1px solid black;*/
 }
 
 .foto_profile1 {
@@ -176,17 +213,6 @@ IMG.displayed {
 
 .foto_profile5 {
     padding-top: 15px;
-}
-
-.pBlock {
-    display: block;
-    height: 90px;
-    width: 90px;
-    /*border: 1px solid gray;*/
-    border-radius: 5px;
-    margin: 4px;
-    overflow: hidden;
-    float: left;
 }
 
 .photographer1 {
@@ -309,6 +335,7 @@ p.blocktext {
 
 /* Slideshow container for photographer*/
 .slideshow-container {
+    display: block;
     max-width: 1000px;
     position: relative;
     margin: auto;
@@ -527,3 +554,41 @@ p.blocktext {
 .home_forum .href {
     text-decoration: none;
 }
+
+.home_interview_1 {
+    text-align: center;
+    font-size: 150%;
+}
+
+.home_interview_image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 60%;
+    height: 40%;
+    overflow: hidden;
+}
+
+.avatar_interview {
+    width: auto;
+    height: 100%;
+}
+
+/*.responsive {*/
+/*    display: block;*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+/*    border-radius: 5px;*/
+/*    border: 1px solid white;*/
+/*    width: auto;*/
+/*    height: 120%;*/
+/*    overflow: hidden;*/
+/*    max-height: 800px;*/
+/*}*/
+
+/*.responsive_image {*/
+/*    width: 100%;*/
+/*    height: auto;*/
+/*}*/

@@ -4,12 +4,12 @@ from .models import PhotoAvatar, UserProfile
 
 
 class PhotoAvatarForm(ModelForm):
-    image = forms.ImageField()
-    user = forms.TextInput()
+    # image = forms.ImageField()
+    # user = forms.TextInput()
 
     class Meta:
         model = PhotoAvatar
-        fields = ['image', 'user']
+        fields = ['image']
 
 
 class UserProfileForm(ModelForm):
