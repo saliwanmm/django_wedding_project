@@ -28,6 +28,11 @@
                     <div class="forum_detail3">
                         <p>{{ comment.full_text }}</p>
                     </div>
+                    {% if comment.user_id == visitor.id or visitor.is_superuser == True %}
+                        <div class="delete_comment_photo">
+                            <a href="{% url "comment_delete" id=comment.id %}">Delete</a>
+                        </div>
+                    {% endif %}
                     <div class="clear"></div>
                 </div>
             {% endfor %}

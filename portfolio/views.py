@@ -38,9 +38,21 @@ def portfolio_comment_crate(request, id):
     if request.method == 'GET':
         return render(request, 'portfolio/foto_portfolio.html')
     else:
+        photo = Portfolio.objects.get(id=id)
+        creater = photo.user_id
         comment = PortfolioComment()
         comment.full_text = request.POST.get('full_text')
         comment.cut_id = id
         comment.user = request.user
         comment.save()
-        return redirect('portfolio')
+        # return redirect('portfolio')
+        return redirect('foto_profile', id=creater, pk=id)
+
+
+def portfolio_comment_delete(request, id):
+    temp_comment = PortfolioComment.objects.get(id=id)
+    temp_photo = Portfolio.objects.get(id=temp_comment.cut_id)
+    photo = temp_comment.cut_id
+    creater = temp_photo.user_id
+    PortfolioComment(id=id).delete()
+    return redirect("foto_profile", id=creater, pk=photo)

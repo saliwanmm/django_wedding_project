@@ -25,6 +25,11 @@
                         </a>
                     </span>
                 </div>
+                {% if photobook.user.id == user.id or user.is_superuser == True %}
+                    <div class="delete_story">
+                        <a href="{% url "delete-story" id=photobook.id %}">Delete story</a>
+                    </div>
+                {% endif %}
             </div>
         {% endfor %}
     </div>

@@ -6,8 +6,12 @@ from django.views.generic import DetailView, UpdateView, DeleteView
 
 
 def forum(request):
+    visitor = request.user
     data = Forum.objects.order_by('-date')
-    return render(request, 'forum/forum.html', {'data': data})
+    return render(request, 'forum/forum.html', {
+        'data': data,
+        "visitor": visitor,
+    })
 
 
 # class ForumDetailView(DetailView):
@@ -19,6 +23,7 @@ def forum(request):
 def ForumDetailView(request, id):
     forum = Forum.objects.get(id=id)
     comments = ForumComment.objects.filter(cut_id=id)
+    visitor = request.user
     try:
         avatars = PhotoAvatar.objects.all()
     except:
@@ -27,6 +32,7 @@ def ForumDetailView(request, id):
         'forum': forum,
         'comments': comments,
         'avatars': avatars,
+        "visitor": visitor,
     })
 
 
@@ -40,6 +46,13 @@ def comment_crate(request, id):
         comment.user = request.user
         comment.save()
         return redirect('forum_detail', id=id)
+
+
+def comment_delete(request, id):
+    temp_comment = ForumComment.objects.get(id=id)
+    article = temp_comment.cut_id
+    ForumComment(id=id).delete()
+    return redirect("forum_detail", id=article)
 
 
 def forum_create(request):
@@ -60,3 +73,8 @@ def forum_create(request):
     }
 
     return render(request, 'forum/forum_create.html', data)
+
+
+def forum_delete(request, id):
+    Forum(id=id).delete()
+    return redirect("forum")

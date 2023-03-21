@@ -268,6 +268,7 @@ def foto_profile(request, id, pk):
     photographer = User.objects.get(id=id)
     foto = Portfolio.objects.get(pk=pk)
     comments = PortfolioComment.objects.filter(cut_id=pk)
+    visitor = request.user
     try:
         avatar = PhotoAvatar.objects.get(user_id=id)
         portfolio = Portfolio.objects.all()
@@ -283,6 +284,7 @@ def foto_profile(request, id, pk):
         "portfolio": portfolio,
         "comments": comments,
         "avatars_comment": avatars_comment,
+        "visitor": visitor,
     })
 
 

@@ -16,6 +16,12 @@
                 <h3><a href="{% url 'forum_detail' el.id %}" class="href">{{ el.title }}</a></h3>
                 <p>...</p>
                 <p>{{ el.date }}</p>
+                {% if visitor.is_superuser == True %}
+                    <div class="delete_comment_photo" style="margin-bottom: 20px">
+                        <a href="{% url "forum_delete" id=el.id %}">Delete</a>
+                    </div>
+                {% endif %}
+
             {% endfor %}
         {% else %}
             <p>There are no articles</p>

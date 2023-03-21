@@ -576,6 +576,14 @@ p.blocktext {
     height: 100%;
 }
 
+.delete_story {
+    text-align: center;
+}
+
+.content2 {
+    margin-top: 25px;
+}
+
 /*.responsive {*/
 /*    display: block;*/
 /*    margin-left: auto;*/

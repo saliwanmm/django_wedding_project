@@ -22,12 +22,34 @@
                         </a>
                     </span>
                 </div>
+
+                {% if photo.user_id == insider.id or insider.is_superuser == True %}
+                    <div class="delete_story">
+                        <a href="{% url "delete_story_portfolio" id=photo.id %}">Delete</a>
+                    </div>
+                {% endif %}
+
+
             </div>
         {% endfor %}
     </div>
     <div class="clear"></div>
+
+    {% if insider.id == user.id or insider.is_superuser == True %}
+    <div>
+        <p>Add new photo</p>
+    </div>
+    <div class="photo_data_09">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.image }}
+            <button>Submit</button>
+        </form>
+    </div>
+    {% endif %}
+
     <div class="comment_general">
-        <div>
+        <div class="content2">
             <p>Comments:</p>
         </div>
         <div class="comment">
@@ -52,7 +74,7 @@
                     <div class="forum_detail3">
                         <p>{{ comment.full_text }}</p>
                     </div>
-                    {% if comment.user_id == user.id or user.is_superuser == True %}
+                    {% if comment.user_id == insider.id or user.is_superuser == True %}
                         <div class="forum_detail4">
                             <a href="{% url "delete_comment_photobook" id=comment.id %}">Delete</a>
                         </div>
@@ -71,6 +93,7 @@
             </div>
 
             <button class="btn btn-success" type="submit">Add comment</button>
+            <p> </p>
             <br>
             <span>{{ error }}</span>
         </form>

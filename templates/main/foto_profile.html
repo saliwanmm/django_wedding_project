@@ -68,14 +68,23 @@
                     <div class="forum_detail2">
                         <p>:</p>
                     </div>
-                    <div class="forum_detail3">
+                    <div class="forum_detail3" >
                         <p>{{ comment.full_text }}</p>
                     </div>
+                    {% if comment.user_id == visitor.id %}
+                    <div class="delete_comment_photo">
+                        <a href="{% url "portfolio_comment_delete" id=comment.id %}">Delete</a>
+                    </div>
+                    {% endif %}
+
+                    <div class="clear"></div>
                 </div>
             {% endfor %}
         </div>
+        <br style="margin-bottom: 20px">
+        <div class="clear"></div>
 
-        <form method="POST" action="{% url 'portfolio_comment_crate' id=foto.id %}">
+        <form method="POST" action="{% url 'portfolio_comment_crate' id=foto.id %}" style="margin-bottom: 30px">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="full_text" class="form-label">Your comment</label>
@@ -86,6 +95,7 @@
             <br>
             <span>{{ error }}</span>
         </form>
-
+        <div class="clear"></div>
+        <p> </p>
     </div>
 {% endblock %}
