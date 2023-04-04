@@ -1,0 +1,43 @@
+{% extends 'common/base.html' %}
+
+{% block title %}
+    Interview open
+{% endblock %}
+
+{% block content %}
+    <p style="text-align: center; margin-top: 25px">OPEN INTERVIEW</p>
+
+    <div class="interview_profile">
+        <a style="text-decoration: none" href="{% url "profile" id=user.id %}">{{ user.first_name }} {{ user.last_name }}({{ user.username }})</a>
+    </div>
+
+    {% for question in questions %}
+        {% for category in categories %}
+            {% if question.cat_category_id == category.id %}
+                <p style="font-weight: bold">- {{ category.description }}</p>
+            {% endif %}
+        {% endfor %}
+        <p style="font-weight: lighter">- {{ question.description }}</p>
+    {% endfor %}
+
+    {% if visitor.id == creater %}
+        <h3 style="margin-top: 50px; margin-bottom: 50px">Add new question</h3>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>WOW</p>
+            <div class="interview_form_question">
+                Choice question: {{ form.cat_category }}
+            </div>
+            <p>answer the question: </p>
+            <div>
+                {{ form.description }}
+            </div>
+            <button type="submit">Add</button>
+        </form>
+        <div style="margin-top: 20px">
+            <a style="text-decoration: none; font-size: 130%" href="{% url "delete_interview" id=interview.id %}">Delete my interview</a>
+        </div>
+    {% endif %}
+    <div class="clear"></div>
+    <p style="margin-top: 50px"></p>
+{% endblock %}

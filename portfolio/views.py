@@ -18,7 +18,7 @@ def foto_portfolio(request, id, pk):
     comments = PortfolioComment.objects.filter(cut_id=pk)
     try:
         avatar = PhotoAvatar.objects.get(user_id=id)
-        portfolio = Portfolio.objects.all().order_by("-id")
+        portfolio = Portfolio.objects.filter(user_id=id).order_by("-id")
         avatars_comment = PhotoAvatar.objects.all()
     except:
         avatar = ''

@@ -87,6 +87,8 @@ def photo_book_comment_crate(request, id):
 
 def foto_photobook_daughter(request, id, pk):
     photo = PhotoBookPortfolio.objects.get(id=pk)
+    story_id = id
+    creater_story_id = photo.user_id
     try:
         portfolio = PhotoBookPortfolio.objects.filter(cut_id=id).order_by("-id")
         portfolio_new = []
@@ -112,6 +114,8 @@ def foto_photobook_daughter(request, id, pk):
     return render(request, "photo_books/foto_photo_book_daughter.html", {
         "portfolio": portfolio,
         "photo": photo,
+        "creater_story_id": creater_story_id,
+        "story_id": story_id,
     })
 
 

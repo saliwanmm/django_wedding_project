@@ -6,10 +6,11 @@
 
 {% block content %}
     <h1 class="zagolovok">New stories on BestWed</h1>
-
-    <div class="create_forum">
-        <a href="{% url "story-create" %}" class="button button1">Create new photobook</a>
-    </div>
+    {% if request.user.is_authenticated %}
+        <div class="create_forum">
+            <a href="{% url "story-create" %}" class="button button1">Create new photobook</a>
+        </div>
+    {% endif %}
 
     <div class="photo_book_general">
         {% for photobook in photobooks %}

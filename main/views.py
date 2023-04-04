@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import PermissionDenied
+from django.db.models.functions import Random
+
+from articles.models import CategoryQuestions, Interviews, Questions
 from .models import PhotoAvatar, UserProfile
 from .forms import PhotoAvatarForm
 from portfolio.models import Portfolio, PortfolioComment
@@ -11,52 +14,105 @@ from django.http import HttpResponse, Http404
 
 
 def home(request):
-    forums = Forum.objects.all().order_by('-id')
-    usersg = User.objects.all()[:3]
+    forums = Forum.objects.all().order_by('-id')[:3]
+    usersg = User.objects.all().order_by(Random())[:3]
     users = UserProfile.objects.all()
+
+    categories = CategoryQuestions.objects.all()
+    interviews = Interviews.objects.all().order_by("-id")
+    questions = Questions.objects.all()
+    my_list = []
+    temp_list = []
+    for question in questions:
+        if question.cat_user_id in temp_list:
+            continue
+        else:
+            my_list.append(question)
+            temp_list.append(question.cat_user_id)
+
+    portfolio = Portfolio.objects.all().order_by("id")[:20]
+
     try:
-        portfolio = Portfolio.objects.all().order_by("id")[:20]
         avatars = PhotoAvatar.objects.all()
-        fotos1 = portfolio[0]
-        fotos2 = portfolio[1]
-        fotos3 = portfolio[2]
-        fotos4 = portfolio[3]
-        fotos5 = portfolio[4]
-        fotos6 = portfolio[5]
-        fotos7 = portfolio[6]
-        fotos8 = portfolio[7]
-        fotos9 = portfolio[8]
-        fotos10 = portfolio[9]
-        fotos11 = portfolio[10]
-        fotos12 = portfolio[11]
-        fotos13 = portfolio[12]
-        fotos14 = portfolio[13]
-        fotos15 = portfolio[14]
-        fotos16 = portfolio[15]
-        fotos17 = portfolio[16]
-        fotos18 = portfolio[17]
-        fotos19 = portfolio[18]
     except:
         avatars = ''
+    try:
+        fotos1 = portfolio[0]
+    except:
         fotos1 = ''
+    try:
+        fotos2 = portfolio[1]
+    except:
         fotos2 = ''
+    try:
+        fotos3 = portfolio[2]
+    except:
         fotos3 = ''
+    try:
+        fotos4 = portfolio[3]
+    except:
         fotos4 = ''
+    try:
+        fotos5 = portfolio[4]
+    except:
         fotos5 = ''
+    try:
+        fotos6 = portfolio[5]
+    except:
         fotos6 = ''
+    try:
+        fotos7 = portfolio[6]
+    except:
         fotos7 = ''
+    try:
+        fotos8 = portfolio[7]
+    except:
         fotos8 = ''
+    try:
+        fotos9 = portfolio[8]
+    except:
         fotos9 = ''
+    try:
+        fotos10 = portfolio[9]
+    except:
         fotos10 = ''
+    try:
+        fotos11 = portfolio[10]
+    except:
         fotos11 = ''
+    try:
+        fotos12 = portfolio[11]
+    except:
         fotos12 = ''
+    try:
+        fotos13 = portfolio[12]
+    except:
         fotos13 = ''
+    try:
+        fotos14 = portfolio[13]
+    except:
         fotos14 = ''
+    try:
+        fotos15 = portfolio[14]
+    except:
         fotos15 = ''
+    try:
+        fotos16 = portfolio[15]
+    except:
         fotos16 = ''
+    try:
+        fotos17 = portfolio[16]
+    except:
         fotos17 = ''
+    try:
+        fotos18 = portfolio[17]
+    except:
         fotos18 = ''
+    try:
+        fotos19 = portfolio[18]
+    except:
         fotos19 = ''
+
     return render(request, 'main/index.html', {
         "avatars": avatars,
         "forums": forums,
@@ -81,6 +137,10 @@ def home(request):
         "fotos17": fotos17,
         "fotos18": fotos18,
         "fotos19": fotos19,
+        "interviews": interviews,
+        "questions": questions,
+        "categories": categories,
+        "my_list": my_list,
     })
 
 
@@ -168,38 +228,35 @@ def change_password(request, id):
 
 
 def profile(request, id):
-    if request.user.is_authenticated:
-        profile_user = User.objects.get(id=id)
-        user_plus = UserProfile.objects.all()
-        if request.POST:
-            form_portfolio = PortfolioForm(request.POST, request.FILES)
-            if form_portfolio.is_valid():
-                my_model = form_portfolio.save(commit=False)
-                my_model.user = request.user
-                my_model.save()
-            return redirect('profile', id=id)
-        try:
-            avatar = PhotoAvatar.objects.get(user_id=id)
-            portfolio = Portfolio.objects.all().order_by("-id")
-        except:
-            avatar = ''
-            portfolio = ''
-        if avatar is not None:
-            return render(request, 'main/profile.html', {
-                'profile_user': profile_user,
-                'user_plus': user_plus,
-                'avatar': avatar,
-                'portfolio': portfolio,
-                'form_portfolio': PortfolioForm,
-            })
-        else:
-            return render(request, 'main/profile.html', {
-                'profile_user': profile_user,
-                'user_plus': user_plus,
-                'form_portfolio': PortfolioForm,
-            })
+    profile_user = User.objects.get(id=id)
+    user_plus = UserProfile.objects.all()
+    if request.POST:
+        form_portfolio = PortfolioForm(request.POST, request.FILES)
+        if form_portfolio.is_valid():
+            my_model = form_portfolio.save(commit=False)
+            my_model.user = request.user
+            my_model.save()
+        return redirect('profile', id=id)
+    try:
+        avatar = PhotoAvatar.objects.get(user_id=id)
+        portfolio = Portfolio.objects.all().order_by("-id")
+    except:
+        avatar = ''
+        portfolio = ''
+    if avatar is not None:
+        return render(request, 'main/profile.html', {
+            'profile_user': profile_user,
+            'user_plus': user_plus,
+            'avatar': avatar,
+            'portfolio': portfolio,
+            'form_portfolio': PortfolioForm,
+        })
     else:
-        raise PermissionDenied
+        return render(request, 'main/profile.html', {
+            'profile_user': profile_user,
+            'user_plus': user_plus,
+            'form_portfolio': PortfolioForm,
+        })
 
 
 def personal_data(request, id):

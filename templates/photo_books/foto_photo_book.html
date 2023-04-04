@@ -74,7 +74,7 @@
                     <div class="forum_detail3">
                         <p>{{ comment.full_text }}</p>
                     </div>
-                    {% if comment.user_id == insider.id or user.is_superuser == True %}
+                    {% if comment.user_id == insider.id or insider.is_superuser == True %}
                         <div class="forum_detail4">
                             <a href="{% url "delete_comment_photobook" id=comment.id %}">Delete</a>
                         </div>

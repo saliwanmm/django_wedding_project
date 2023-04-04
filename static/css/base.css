@@ -584,19 +584,41 @@ p.blocktext {
     margin-top: 25px;
 }
 
-/*.responsive {*/
-/*    display: block;*/
-/*    margin-left: auto;*/
-/*    margin-right: auto;*/
-/*    border-radius: 5px;*/
-/*    border: 1px solid white;*/
-/*    width: auto;*/
-/*    height: 120%;*/
-/*    overflow: hidden;*/
-/*    max-height: 800px;*/
-/*}*/
+.interview {
+    border: 1px solid black;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    padding-left: 20px;
+    padding-top: 10px;
+}
 
-/*.responsive_image {*/
-/*    width: 100%;*/
-/*    height: auto;*/
-/*}*/
+.interview_form_question {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.search_photograph {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.result_search_photographer {
+    border: 1px solid black;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.interview_profile {
+    text-decoration: none;
+    font-size: 150%;
+    text-align: center;
+    margin-bottom: 25px;
+}

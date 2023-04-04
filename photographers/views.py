@@ -2,17 +2,20 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from main.models import UserProfile, PhotoAvatar
 from portfolio.models import Portfolio
+from .forms import UserSearchForm
 
 
 def photographers(request):
     photographers = User.objects.all()
     photographers_plus = UserProfile.objects.all()
     try:
-        avatars = PhotoAvatar.objects.all()
         portfolio = Portfolio.objects.all().order_by("-id")
     except:
-        avatars = ''
         portfolio = ''
+    try:
+        avatars = PhotoAvatar.objects.all()
+    except:
+        avatars = ''
 
     if avatars is not None:
         return render(request, 'photographers/photographers.html', {
@@ -60,8 +63,14 @@ def foto_photographer(request, id, pk):
         "photographer": photographer,
     })
 
-# def phone_card(request, id):
-#     photographers_plus = UserProfile.objects.get(user_id=id)
-#     return render(request, "photographers/phone.html", {
-#         "photographers_plus": photographers_plus,
-#     })
+
+def find_photographer(request):
+    form = UserSearchForm(request.GET)
+    users = []
+    if form.is_valid():
+        last_name = form.cleaned_data["last_name"]
+        users = User.objects.filter(last_name__icontains=last_name)
+    return render(request, "photographers/find-photographer.html", {
+        "form": form,
+        "users": users,
+    })

@@ -1,0 +1,30 @@
+{% extends 'common/base.html' %}
+
+{% block title %}
+    Photographers
+{% endblock %}
+
+{% block content %}
+    <h1 class="zagolovok">Search for photographers</h1>
+
+    <div class="search_photograph">
+        <form method="get" action="{% url "find_interview" %}">
+        {% csrf_token %}
+            {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+    </div>
+
+
+    {% if users %}
+        <h2>Results</h2>
+            <div>
+                {% for user in users %}
+                    <div class="result_search_photographer">
+                        <a style="text-decoration: none" href="{% url "open_interview" id=test %}"><p>{{ user.first_name }} {{ user.last_name }} ({{ user.username }}) - interview</p></a>
+                    </div>
+                {% endfor %}
+            </div>
+    {% endif %}
+
+{% endblock %}
