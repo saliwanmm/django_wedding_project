@@ -27,3 +27,17 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.phone
+
+
+# class CustomUser(User):
+#     image_url = models.CharField(max_length=255, blank=True)
+#     phone = models.CharField(max_length=13, blank=True)
+#     country = models.CharField(max_length=255, blank=True)
+#     web_site = models.CharField(max_length=255, blank=True)
+#     language = models.CharField(max_length=255, blank=True)
+#     price = models.CharField(max_length=10, blank=True)
+#     hour = models.CharField(max_length=10, blank=True)
+#
+#     class Meta:
+#         verbose_name = "User"
+#         verbose_name_plural = "Users"

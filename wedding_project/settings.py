@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+# # Set AUTH_USER_MODEL to your custom user model
+# AUTH_USER_MODEL = "wedding_project.CustomUser"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

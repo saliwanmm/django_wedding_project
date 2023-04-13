@@ -238,11 +238,13 @@ def profile(request, id):
             my_model.save()
         return redirect('profile', id=id)
     try:
-        avatar = PhotoAvatar.objects.get(user_id=id)
         portfolio = Portfolio.objects.all().order_by("-id")
     except:
-        avatar = ''
         portfolio = ''
+    try:
+        avatar = PhotoAvatar.objects.get(user_id=id)
+    except:
+        avatar = ''
     if avatar is not None:
         return render(request, 'main/profile.html', {
             'profile_user': profile_user,
